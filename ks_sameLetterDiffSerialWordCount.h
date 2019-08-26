@@ -1,0 +1,14 @@
+//
+// Created by huazai on 2019-08-14.
+//
+
+#ifndef CODING_KS_SAMELETTERDIFFSERIALWORDCOUNT_H
+#define CODING_KS_SAMELETTERDIFFSERIALWORDCOUNT_H
+
+
+class ks_sameLetterDiffSerialWordCount {
+
+};
+
+
+#endif //CODING_KS_SAMELETTERDIFFSERIALWORDCOUNT_H
