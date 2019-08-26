@@ -1,32 +1,33 @@
-# Prerequisites
-*.d
+maven
+target/
 
-# Compiled Object files
-*.slo
-*.lo
+# eclipse ignore
+.settings/
+.project
+.classpath
+bin/
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+*.swp
+*.swo
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# C/C++
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+logs
+/build/
+cmake-build-debug/
