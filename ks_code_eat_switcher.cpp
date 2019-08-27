@@ -1,3 +1,6 @@
+//todo kick start E: Code-Eat Switcher
+//todo greedy
+
 #include<algorithm>
 #include<iostream>
 #include<cstring>

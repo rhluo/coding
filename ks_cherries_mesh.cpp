@@ -1,3 +1,6 @@
+//todo kick start E: Cherries Mesh
+//todo MST
+
 #include <iostream>
 #include <algorithm>
 using namespace std;

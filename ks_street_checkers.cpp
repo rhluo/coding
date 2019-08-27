@@ -1,3 +1,6 @@
+//todo kick start E: Street Checkers
+//todo 打表
+
 #include <iostream>
 #include <math.h>
 
