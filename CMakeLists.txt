@@ -3,4 +3,4 @@ project(coding)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(coding dinnerPlateStacks.cpp dinnerPlateStacks.h)
+add_executable(coding ks_e_3.cpp)

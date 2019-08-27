@@ -5,77 +5,100 @@
 #include<unordered_map>
 using namespace std;
 
-int main()
-{
-    int T, D, S;
-    int eff[2][2];
-    int code, eat;
-    int coder_index, eater_index;
-    double code_pct, eat_pct;
-    double eat_sum, code_sum;
-    cin >> T;
-    for (int t = 1; t <= T; t++)
-    {
-        cin >> D >> S;
-        for (int i = 0; i < S; i++)
-        {
-            cin >> eff[i][0] >> eff[i][1];
+const int N = 1e5 + 10;
+
+struct slot {
+    long long c;
+    long long e;
+}slots[N];
+
+static bool cmp(slot s1, slot s2) {
+    return s1.c * s2.e > s1.e * s2.c;
+}
+
+long long sa[N], sb[N];
+int d, s;
+
+bool cal2(long long wantC, long long wantE) {
+    if (wantC > sa[s] || wantE > sb[s])
+        return false;
+
+    int l = 1, r = s;
+    while (l < r) {
+        int m = (l + r) >> 1;
+        if (sa[m] >= wantC) {
+            r = m;
+        } else {
+            l = m + 1;
         }
-        cout << "Case #" << t << ": ";
-        for (int i = 0; i < D; i++)
-        {
-            cin >> code >> eat;
-            if (S == 1)
-            {
-                if (code > eff[0][0])
-                {
-                    cout << "N";
-                    continue;
-                }
-                code_pct = 1.0 * code / eff[0][0];
-                eat_pct = 1.0 - code_pct;
-                if (eat_pct * eff[0][1] >= eat)
-                    cout << "Y";
-                else
-                    cout << "N";
-            }
-            else
-            {
-                eat_sum = 0;
-                if (1.0 * eff[0][0] / eff[0][1] < 1.0*eff[1][0] / eff[1][1])
-                    coder_index = 1;
-                else
-                    coder_index = 0;
-                eater_index = 1 - coder_index;
-                if (eff[coder_index][0] > code)
-                {
-                    code_pct = 1.0*code / eff[coder_index][0];
-                    eat_pct = 1.0 - code_pct;
-                    eat_sum = eat_pct * eff[coder_index][1];
-                    if (eat_sum + eff[eater_index][1] >= eat)
-                        cout << "Y";
-                    else
-                        cout << "N";
-                }
-                else
-                {
-                    code_sum = eff[coder_index][0];
-                    if (code_sum + eff[eater_index][0] < code)
-                        cout << "N";
-                    else
-                    {
-                        code_pct = 1.0*(code - code_sum) / eff[eater_index][0];
-                        eat_pct = 1.0 - code_pct;
-                        eat_sum = eat_pct * eff[eater_index][1];
-                        if (eat_sum >= eat)
-                            cout << "Y";
-                        else
-                            cout << "N";
-                    }
-                }
-            }
-        }
-        cout << endl;
     }
+
+    /* double c = sb[n] - sb[l] + (sa[l] - a) / p[l].x * p[l].y - b; */
+    long long cc = (sb[s] - sb[l]) * slots[l].c + (sa[l] - wantC) * slots[l].e - wantE * slots[l].c;
+    if (cc >= 0)
+        return true;
+    return false;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    for(int cases = 1;cases <= T; cases++) {
+        cin >> d >> s;
+
+        for(int i = 1;i <= s;i++) {
+            cin >> slots[i].c >> slots[i].e;
+        }
+
+        sort(slots+1, slots+s+1, cmp);
+
+
+        for(int i = 1;i <= s; i++) {
+            sa[i] = sa[i-1] + slots[i].c;
+            sb[i] = sb[i-1] + slots[i].e;
+        }
+
+        string rslt = "";
+        for(int j = 0;j < d;j++) {
+            long long wantC, wantE;
+            cin >> wantC >> wantE;
+            if(cal2(wantC, wantE)) rslt += "Y";
+            else rslt += "N";
+        }
+
+        printf("Case #%d: %s\n", cases, rslt.c_str());
+    }
+
     return 0;
 }
+/*
+2
+4 2
+3 8
+6 10
+0 18
+3 13
+10 0
+7 3
+1 2
+4 4
+4 4
+0 0
+
+1
+4 2
+3 8
+6 10
+0 18
+3 13
+10 0
+7 3
+
+1
+1 2
+3 8
+6 10
+10 0
+
+ */
