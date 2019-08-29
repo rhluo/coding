@@ -24,7 +24,8 @@ int solve() {
 
     for(int i = 1;i <= n;i++) {
         for(int j = 1;j <= m;j++) {
-            dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            dp[i][j] = dp[i-1][j];
+            //dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
             if(j >= stones[i].s)
                 dp[i][j] = max(dp[i][j], dp[i-1][j - stones[i].s] + max(0, stones[i].e - stones[i].l*(j - stones[i].s)));
         }
@@ -37,7 +38,12 @@ int solve() {
 //        cout << endl;
 //    }
 
-    return dp[n][m];
+    int rslt = 0;
+    for(int i = 1;i <= m;i++) {
+        rslt = max(rslt, dp[n][i]);
+    }
+
+    return rslt;
 }
 
 int main() {

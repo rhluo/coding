@@ -3,4 +3,4 @@ project(coding)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(coding ks_b_energy_stones.cpp)
+add_executable(coding ks_b_diverse_subarray.cpp ks_b_diverse_subarray.h)
